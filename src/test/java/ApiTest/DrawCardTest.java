@@ -29,10 +29,11 @@ public class DrawCardTest {
 
         given().accept(ContentType.JSON)
                 .and().queryParam("count",1)
-                .when().get("https://deckofcardsapi.com/api/deck/new/draw/")
+                .when().log().all().get("https://deckofcardsapi.com/api/deck/new/draw/")
                 .then().statusCode(200)
                 .and().contentType("application/json")
-                .and().assertThat().body("success",equalTo(true),"remaining",equalTo(51));
+                .and().assertThat().body("success",equalTo(true),"remaining",equalTo(51))
+                .log().all();
 
     }
     @Test
@@ -41,11 +42,11 @@ public class DrawCardTest {
 
         given().accept(ContentType.JSON)
                 .queryParam("count",55)
-                .when().get("https://deckofcardsapi.com/api/deck/new/draw/")
+                .when().log().all().get("https://deckofcardsapi.com/api/deck/new/draw/")
                 .then().assertThat().statusCode(200)
                 .assertThat().body("success",equalTo(false),
                         "error",equalTo("Not enough cards remaining to draw 55 additional"),
-                        "remaining",equalTo(0));
+                        "remaining",equalTo(0)).log().all();
     }
 
 }
