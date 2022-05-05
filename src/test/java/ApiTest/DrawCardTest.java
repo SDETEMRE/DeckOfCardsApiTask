@@ -38,6 +38,8 @@ public class DrawCardTest {
     }
     @Test
     public void NegativeTests(){
+        //negative test scenario
+
         given().accept(ContentType.JSON)
                 .queryParam("count",55)
                 .when().get("https://deckofcardsapi.com/api/deck/new/draw/")
